@@ -1,0 +1,15 @@
+{
+  "name": "brap",
+  "version": "1.0.0",
+  "description": "BitRate Adjustment Program",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^10.1.5",
+    "electron-builder": "^22.9.1"
+  }
+}
