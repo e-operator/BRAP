@@ -7,9 +7,11 @@
         <center>
         <p id="status" style="color:whitesmoke">brap is ready.</p>
 
+        <button id="file-select-button" class="file-button"><span>Open file...</span></button>
+
         <div style="display:flex;flex-direction:column">
         <p style="color:gray">Enter local address of video</p>
-        <input type="text" id="video-address">
+
 
         <p style="color:gray">Enter new audio bitrate (must be >=500)</p>
         <input type="text" id="bitrate-audio">
@@ -19,12 +21,21 @@
         </div>
 
         <br><br>
+        <input type="radio" id="bass-boost" name="boost-opt" value="bass boost">
+        <label for="bass boost">bass boost</label>
+        
+        <input type="radio" id="no-boost" name="boost-opt" value="no boost" checked>
+        <label for="no boost">no boost</label>
+
+        <input type="radio" id="treble-boost" name="boost-opt" value="treble boost">
+        <label for="treble boost">treble boost</label>
+        <br><br>
             
         <button id="render-button" class="message-button"><span>Go!</span></button>
 
         <br><br>
 
-        <p style="color:gray">brap 0.0.4-Alpha</p>
+        <p style="color:gray">brap 0.0.5-Alpha</p>
         <p style="color:gray">ffmpeg 4.3.1-2020-10-01-full</p>
         </center>
     </body>

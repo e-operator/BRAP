@@ -1,4 +1,4 @@
-const { ipcMain, app, BrowserWindow } = require('electron');
+const { ipcMain, app, dialog, BrowserWindow, ipcRenderer } = require('electron');
 
 function start_main (){
     let mainWin = new BrowserWindow({
@@ -9,6 +9,13 @@ function start_main (){
         }
     })
     mainWin.loadFile('landing.html');
+
+ipcMain.on('request-file-path', (event) => {
+    dialog.showOpenDialog({properties: ['openFile']}).then(result => {
+        console.log(result.filePaths[0]);
+        event.sender.send('file-selected', result.filePaths[0]);
+    });
+});
 
 ipcMain.on('ffmpeg-render', (event, audioBitrate, videoBitrate, path) => {
     let opts = {
