@@ -27,7 +27,7 @@ renderButton.addEventListener('click', () => {
             statusText.innerHTML = "Error: bitrate must be >=500";
         }else{
             ipcRenderer.send('ffmpeg-render', audioBitrate, videoBitrate, filePath);
-            statusText.innerHTML = "brap is raping your video...";
+            statusText.innerHTML = "[1/2] processing your video...";
             renderButton.disabled = true;
         }
     }else{
@@ -41,7 +41,7 @@ ipcRenderer.on('file-selected', function (event, path) {
 
 ipcRenderer.on('ffmpeg-render-done', function () {
     ipcRenderer.send('ffmpeg-convert');
-    statusText.innerHTML = "brap is finalizing your video..."
+    statusText.innerHTML = "[2/2] converting your video..."
 });
 
 ipcRenderer.on('ffmpeg-convert-done', function () {
