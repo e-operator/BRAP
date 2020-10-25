@@ -67,6 +67,9 @@ body {
   pointer-events: none;
 }
 
+input {
+  flex: 2;
+}
 
 .text-simple {
     color: white;

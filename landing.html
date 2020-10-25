@@ -6,13 +6,25 @@
     <body>
         <center>
         <p id="status" style="color:whitesmoke">brap is ready.</p>
+
+        <div style="display:flex;flex-direction:column">
         <p style="color:gray">Enter local address of video</p>
         <input type="text" id="video-address">
-        <p style="color:gray">Enter new bitrate (must be >=500)</p>
-        <input type="text" id="bitrate">
-        <button id="render-button" class="message-button"><span>Go!</span></button>
+
+        <p style="color:gray">Enter new audio bitrate (must be >=500)</p>
+        <input type="text" id="bitrate-audio">
+
+        <p style="color:gray">Enter new video bitrate (must be >=500)</p>
+        <input type="text" id="bitrate-video">
+        </div>
+
         <br><br>
-        <p style="color:gray">brap 0.0.3-Alpha</p>
+            
+        <button id="render-button" class="message-button"><span>Go!</span></button>
+
+        <br><br>
+
+        <p style="color:gray">brap 0.0.4-Alpha</p>
         <p style="color:gray">ffmpeg 4.3.1-2020-10-01-full</p>
         </center>
     </body>

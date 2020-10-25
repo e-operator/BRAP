@@ -10,11 +10,11 @@ function start_main (){
     })
     mainWin.loadFile('landing.html');
 
-ipcMain.on('ffmpeg-render', (event, bitrate, path) => {
+ipcMain.on('ffmpeg-render', (event, audioBitrate, videoBitrate, path) => {
     let opts = {
         "cwd":"./ffmpeg/bin"
     };
-    var child_ffmpeg_render = require('child_process').exec("ffmpeg.exe -y -i \"" + path + "\" -b:a " + bitrate + " -b:v " + bitrate + " -minrate " + bitrate + " -maxrate " + bitrate + " -bufsize " + bitrate + " output.webm", opts);
+    var child_ffmpeg_render = require('child_process').exec("ffmpeg.exe -y -i \"" + path + "\" -b:a " + audioBitrate + " -b:v " + videoBitrate + " -minrate " + videoBitrate + " -maxrate " + videoBitrate + " -bufsize " + videoBitrate + " output.webm", opts);
     child_ffmpeg_render.stdout.pipe(process.stdout);
     child_ffmpeg_render.stderr.pipe(process.stdout);
     child_ffmpeg_render.on('exit', function() {

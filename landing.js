@@ -5,18 +5,21 @@ console.log("Script loaded successfully!");
 
 const renderButton = document.getElementById('render-button');
 const locationInput = document.getElementById('video-address');
-const bitrateInput = document.getElementById('bitrate');
+const audioBitrateInput = document.getElementById('bitrate-audio');
+const videoBitrateInput = document.getElementById('bitrate-video');
 
 const statusText = document.getElementById('status');
 
 renderButton.addEventListener('click', () => {
-    var bitrate = parseInt(bitrateInput.value);
+    var audioBitrate = parseInt(audioBitrateInput.value);
+    var videoBitrate = parseInt(videoBitrateInput.value);
+
     if(fs.existsSync(locationInput.value)){
-        if(bitrate < 500){
+        if(audioBitrate < 500 || videoBitrate < 500){
             console.error("Error: bitrate must be >=500");
             statusText.innerHTML = "Error: bitrate must be >=500";
         }else{
-            ipcRenderer.send('ffmpeg-render', bitrate, locationInput.value);
+            ipcRenderer.send('ffmpeg-render', audioBitrate, videoBitrate, locationInput.value);
             statusText.innerHTML = "brap is raping your video...";
             renderButton.disabled = true;
         }
