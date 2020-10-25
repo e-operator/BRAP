@@ -5,11 +5,11 @@ console.log("Script loaded successfully!");
 
 const renderButton = document.getElementById('render-button');
 const fileSelectButton = document.getElementById('file-select-button');
-const locationInput = document.getElementById('video-address');
 const audioBitrateInput = document.getElementById('bitrate-audio');
 const videoBitrateInput = document.getElementById('bitrate-video');
 
 const statusText = document.getElementById('status');
+const subStatusText = document.getElementById('extra-status');
 
 var filePath;
 
@@ -18,6 +18,17 @@ fileSelectButton.addEventListener('click', () => {
 });
 
 renderButton.addEventListener('click', () => {
+
+    var boostSelectors = document.getElementsByName('boost-opt');
+    var boostMode;
+    for(var i = 0; i < boostSelectors.length; i++){
+        if(boostSelectors[i].checked){
+            boostMode = boostSelectors[i].value;
+        }
+    }          
+
+    console.log(boostMode);
+    
     var audioBitrate = parseInt(audioBitrateInput.value);
     var videoBitrate = parseInt(videoBitrateInput.value);
 
@@ -26,7 +37,7 @@ renderButton.addEventListener('click', () => {
             console.error("Error: bitrate must be >=500");
             statusText.innerHTML = "Error: bitrate must be >=500";
         }else{
-            ipcRenderer.send('ffmpeg-render', audioBitrate, videoBitrate, filePath);
+            ipcRenderer.send('ffmpeg-render', audioBitrate, videoBitrate, filePath, boostMode);
             statusText.innerHTML = "[1/2] processing your video...";
             renderButton.disabled = true;
         }
@@ -39,6 +50,11 @@ ipcRenderer.on('file-selected', function (event, path) {
     filePath = path;
 });
 
+ipcRenderer.on('progress-report', function (event, progress) {
+    console.log(progress);
+    subStatusText.innerHTML = "Frame: " + progress["frame"] + " FPS: " + progress["fps"];
+});
+
 ipcRenderer.on('ffmpeg-render-done', function () {
     ipcRenderer.send('ffmpeg-convert');
     statusText.innerHTML = "[2/2] converting your video..."
@@ -47,6 +63,7 @@ ipcRenderer.on('ffmpeg-render-done', function () {
 ipcRenderer.on('ffmpeg-convert-done', function () {
     ipcRenderer.send('open-processed-video');
     statusText.innerHTML = "your brapsterpiece is ready."
+    subStatusText.innerHTML = "";
 });
 
 ipcRenderer.on('all-done', function () {
