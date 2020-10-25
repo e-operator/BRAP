@@ -3,21 +3,6 @@ body {
     font-family: Arial;
 }
 
-.demo-button {
-    align-self: flex-start;
-    margin-right: 1em;
-    border: 4px solid;
-    border-color: #7289DA;
-    border-radius: 8px;
-    font-family: Arial;
-    font-size: 1.2em;
-    padding: .4em 1.2em;
-    color: #7289da;
-    background-color: transparent;
-    transition: border-color 0.2s;
-    text-align: right;
-}
-
 .file-button {
   align-self: flex-start;
   margin-right: 1em;
@@ -112,79 +97,3 @@ label {
     background-color: #2C2F33;
     border-bottom: 2px solid #7289DA;
 }
-
-.demo-button span {
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-    transition: 0.5s;
-}
-
-.demo-button span:after {
-    content: '\00bb';
-    position: absolute;
-    opacity: 0;
-    top: 0;
-    right: -20px;
-    transition: 0.5s;
-}
-
-.demo-button:hover span {
-    padding-right: 25px;
-}
-
-.demo-button:hover span:after {
-    opacity: 1;
-    right: 0;
-}
-
-.demo-button:active {
-    border-color: grey;
-}
-
-.dropbtn {
-    background-color: transparent;
-    border-color: #7289DA;
-    color: #7289DA;
-    padding: .4em 1.2em;
-    font-size: 1.2em;
-    border: 4px solid #7289DA;
-    border-radius: 8px;
-    cursor: pointer;
-    text-align: right;
-  }
-  
-  .dropdown {
-    position: absolute;
-    display: inline-block;
-  }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    color: white;
-    background-color: #2C2F33;
-    min-width: 160px;
-    z-index: 1;
-  }
-  
-  .dropdown-content a {
-    color: white;
-    padding: 18px 16px;
-    text-decoration: none;
-    display: block;
-  }
-  
-  .dropdown-content a:hover {
-    background-color: #7289DA;
-    border: none;  
-    border-radius: 8px;
-  }
-  
-  .dropdown:hover .dropdown-content {
-      display: block;
-  }
-  
-  .dropdown:hover .dropbtn {
-    color: white;
-  }
