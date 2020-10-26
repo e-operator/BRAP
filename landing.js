@@ -5,6 +5,7 @@ console.log("Script loaded successfully!");
 
 const renderButton = document.getElementById('render-button');
 const fileSelectButton = document.getElementById('file-select-button');
+
 const audioBitrateInput = document.getElementById('bitrate-audio');
 const videoBitrateInput = document.getElementById('bitrate-video');
 

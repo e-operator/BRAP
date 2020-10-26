@@ -1,4 +1,4 @@
-const { ipcMain, app, dialog, BrowserWindow, ipcRenderer } = require('electron');
+const { ipcMain, app, dialog, BrowserWindow } = require('electron');
 
 function start_main (){
     let mainWin = new BrowserWindow({
@@ -21,7 +21,9 @@ ipcMain.on('ffmpeg-render', (event, audioBitrate, videoBitrate, path, boostMode)
     let opts = {
         "cwd":"./ffmpeg/bin"
     };
+
     console.log("!!!!BOOSTMODE: " + boostMode);
+
     switch(boostMode){
         case "no boost":{
             console.log("Using no boost");
@@ -44,11 +46,14 @@ ipcMain.on('ffmpeg-render', (event, audioBitrate, videoBitrate, path, boostMode)
             break;
         }
     }
+
     child_ffmpeg_render.stdout.pipe(process.stdout);
     child_ffmpeg_render.stderr.pipe(process.stdout);
+
     child_ffmpeg_render.on('exit', function() {
         event.sender.send('ffmpeg-render-done');
     });
+
     child_ffmpeg_render.stdout.on('data', function(data) {
         var outLines = data.toString().split('\n');
         var progress = {};
@@ -66,9 +71,12 @@ ipcMain.on('ffmpeg-convert', (event) => {
     let opts = {
         "cwd":"./ffmpeg/bin"
     };
+
     var child_ffmpeg_convert = require('child_process').exec("ffmpeg.exe -y -i output.webm output.mp4", opts);
+
     child_ffmpeg_convert.stdout.pipe(process.stdout);
     child_ffmpeg_convert.stderr.pipe(process.stdout);
+
     child_ffmpeg_convert.on('exit', function() {
         event.sender.send('ffmpeg-convert-done');
     });
@@ -78,9 +86,12 @@ ipcMain.on('open-processed-video', (event) => {
     let opts = {
         "cwd":"./ffmpeg/bin"
     };
+
     var child_ffmpeg_convert = require('child_process').exec("output.mp4", opts);
+
     child_ffmpeg_convert.stdout.pipe(process.stdout);
     child_ffmpeg_convert.stderr.pipe(process.stdout);
+    
     child_ffmpeg_convert.on('exit', function() {
         event.sender.send('all-done');
     });
